@@ -48,6 +48,11 @@ class Experimento:
     travou: bool = False
 
     def __post_init__(self) -> None:
+        """Cria o buffer circular vazio com N posições logo depois da construção.
+
+        Retorna:
+            None.
+        """
         self.buffer = [None] * self.n
 
 

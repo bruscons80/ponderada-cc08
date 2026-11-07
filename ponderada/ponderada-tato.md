@@ -70,7 +70,11 @@ tempo_H' = 5,000 ms / 1,923 = 5,000 × 0,52 = 2,600 ms
 
 ### Por que a V precisa de cache e a H não
 
-&emsp;Na arquitetura Von Neumann, instruções e dados passam pelo mesmo caminho até a mesma memória, e esse caminho único é o gargalo. Na Plataforma V, a DRAM custa 120 ciclos por acesso e cada instrução faz 1,3 acessos; sem cache, o CPI seria 1 + 1,3 × 120 = 157 e a amostra levaria 160.000 × 157 / 1,2 GHz ≈ 20,9 ms, quatro vezes o limite. A cache guarda perto da CPU o que está sendo usado e esconde a distância até a DRAM. A Plataforma H é Harvard, com caminhos separados para instrução e dado, e a sua SRAM interna responde em 1 ciclo a 48 MHz: a memória acompanha o processador e não há distância para esconder.
+&emsp;Na Von Neumann, instruções e dados disputam o mesmo caminho até a mesma memória, e esse caminho é o gargalo.
+Na V cada instrução faz 1,3 acessos a uma DRAM de 120 ciclos: sem cache, o CPI seria 1 + 1,3 × 120 = 157.
+Isso daria 160.000 × 157 / 1,2 GHz ≈ 20,9 ms por amostra, quatro vezes o limite; a cache esconde essa distância.
+A H é Harvard, com caminhos separados para instrução e dado, e a SRAM responde em 1 ciclo a 48 MHz.
+Lá a memória acompanha o processador, então não há distância para esconder.
 
 ### Evidência da minha máquina
 

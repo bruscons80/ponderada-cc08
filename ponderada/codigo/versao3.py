@@ -23,6 +23,10 @@ def produtor(exp: Experimento) -> None:
     Parâmetros:
         exp: estado compartilhado, com os semáforos criados por versao2.preparar().
 
+    Retorna:
+        None. Com a ordem trocada, normalmente nunca chega ao fim: fica preso em
+        wait(vazio) segurando o mutex até o experimento mandar parar.
+
     Funcionamento:
         Igual ao produtor da versão 2, exceto pela ordem das duas esperas. O consumidor
         é o mesmo da versão 2, para que a única diferença entre as versões seja essa.

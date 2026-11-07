@@ -22,6 +22,9 @@ def produtor(exp: Experimento) -> None:
     Parâmetros:
         exp: estado compartilhado do experimento.
 
+    Retorna:
+        None. O resultado fica no próprio exp (buffer, contador e produtor_terminou).
+
     Funcionamento:
         Espera (girando) até o contador indicar uma posição livre, grava a amostra e
         incrementa o contador em dois passos separados (ler, ser interrompido, escrever).
@@ -46,6 +49,9 @@ def consumidor(exp: Experimento) -> None:
 
     Parâmetros:
         exp: estado compartilhado do experimento.
+
+    Retorna:
+        None. As amostras entregues ficam em exp.recebidas e o travamento em exp.travou.
 
     Funcionamento:
         Espera (girando) até o contador indicar algo para ler, lê a posição e decrementa

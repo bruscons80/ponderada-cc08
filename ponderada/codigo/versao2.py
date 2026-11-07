@@ -22,6 +22,9 @@ def preparar(exp: Experimento) -> None:
 
     Parâmetros:
         exp: experimento que vai rodar; recebe os atributos vazio, cheio e mutex.
+
+    Retorna:
+        None.
     """
     exp.vazio = threading.Semaphore(exp.n)
     exp.cheio = threading.Semaphore(0)
@@ -33,6 +36,14 @@ def produtor(exp: Experimento) -> None:
 
     Parâmetros:
         exp: estado compartilhado, já com os semáforos criados por preparar().
+
+    Retorna:
+        None. Ao terminar todas as amostras, sinaliza exp.produtor_terminou.
+
+    Funcionamento:
+        Para cada amostra, espera uma posição livre (vazio), entra na região crítica
+        (mutex), grava e avança o índice, sai da região crítica e avisa que há uma
+        posição a mais com dado (cheio).
     """
     entrada = 0
     for amostra in range(exp.total):
@@ -53,6 +64,9 @@ def consumidor(exp: Experimento) -> None:
 
     Parâmetros:
         exp: estado compartilhado, já com os semáforos criados por preparar().
+
+    Retorna:
+        None. As amostras entregues ficam em exp.recebidas e o travamento em exp.travou.
 
     Funcionamento:
         Termina normalmente quando o produtor acabou e não sobrou nada no buffer; se uma
